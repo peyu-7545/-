@@ -43,18 +43,20 @@
 
     .page-corner {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 100px;
-      height: 100px;
-      background: linear-gradient(135deg, #ff9800 50%, #333333 50%);
+      bottom: 0;
+      right: 0;
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, #ffffff 50%, #121212 50%);
       clip-path: polygon(0 0, 100% 0, 100% 100%);
       cursor: pointer;
-      transition: transform 0.3s;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
 
     .page-corner:hover {
       transform: scale(1.1);
+      box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
     }
 
     .hidden-page {
@@ -92,10 +94,6 @@
     function flipPage() {
       const hiddenPage = document.getElementById('hiddenPage');
       hiddenPage.classList.add('visible');
-
-      setTimeout(() => {
-        alert('冗談だよ！まだ続くよ！');
-      }, 2000); /* 2秒後にアラートを表示 */
     }
   </script>
 </body>
