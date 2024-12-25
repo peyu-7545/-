@@ -43,8 +43,8 @@
 
     .page-corner {
       position: fixed;
-      bottom: 0;
-      right: 0;
+      bottom: 20px; /* 画面の下に配置 */
+      right: 20px; /* 画面の右端に配置 */
       width: 120px;
       height: 120px;
       background: linear-gradient(135deg, #ffffff 50%, #121212 50%);
@@ -71,10 +71,24 @@
       justify-content: center;
       align-items: center;
       font-size: 24px;
+      z-index: 10;
     }
 
     .hidden-page.visible {
       display: flex; /* 表示時にフレックスボックスで中央揃え */
+    }
+
+    @keyframes page-flip {
+      0% {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+      }
+      100% {
+        clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+      }
+    }
+
+    .page-corner.animate {
+      animation: page-flip 1s ease forwards;
     }
   </style>
 </head>
@@ -84,7 +98,7 @@
     <div class="loading-spinner"></div>
   </div>
 
-  <div class="page-corner" onclick="flipPage()"></div>
+  <div class="page-corner" id="pageCorner" onclick="flipPage()"></div>
 
   <div class="hidden-page" id="hiddenPage">
     <p>裏ページへようこそ！</p>
@@ -92,8 +106,15 @@
 
   <script>
     function flipPage() {
+      const pageCorner = document.getElementById('pageCorner');
       const hiddenPage = document.getElementById('hiddenPage');
-      hiddenPage.classList.add('visible');
+
+      pageCorner.classList.add('animate');
+
+      setTimeout(() => {
+        hiddenPage.classList.add('visible');
+        pageCorner.style.display = 'none';
+      }, 1000); // アニメーションが終わった後にページを表示
     }
   </script>
 </body>
